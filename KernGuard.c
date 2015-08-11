@@ -638,7 +638,7 @@ void transfer_reports(void)
 
 	if (strlen(failed_payload) > 0)
 	{
-		if (send_msg(payload) == -11)
+		if (send_msg(failed_payload) == -11)
 		{
 			//failed again
 			//leave report in failed section, abort
