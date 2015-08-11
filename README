@@ -1,0 +1,32 @@
+ ---- NetGuard README -----
+
+To operate, the projects needs a linux with kernel 3.14 (tested)
+
+This folder includes four files:
+	1. KernGuard.c - the kernel module, it is compiled using the makefile attached (needs kernel headers)
+	2. NetConnect.c - the userspace program that uses netlink sockets to communicate with the kernel (supports upto 90kb transmission per socket - tested)
+	3. Operator.py - this is a userspace python script that uses the "NetConnect" service to pass data between user and kernel space effectively (tested)
+	4. makefile for compilation
+
+Notes: 
+
+	* Operator.py can be used to communicate with outside server aswell, just not implemented yet. should be able to support this funcionallity in the next few days.
+	* To use the operator, you need to open a text file with the name "NetCommands.txt" and put the desired message to pass to the kernel inside it
+	* Before a new ruleset is applied, take care and use "PULL" messages often to avoid slowing the system.
+
+
+Protocol to use KernGuard functionallity:
+
+1. "PULL" - message retrieves all reports from kernel and saves result in "toArch.txt"
+2. "RULE:<pattern>#<pattern>#<pattern>#" - message that applies a ruleset, uses '#' (0x23) to separate patterns
+
+* Included, file with set of arbitrary rule set, to use this ruleset:
+1. compile and insert module to kernel
+2. run operator with file (mentioned above)
+3. to pull data from the kerne, edit the file so it contains only “PULL”, save and run operator.
+
+Goodluck. 
+
+
+
+FIN

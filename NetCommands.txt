@@ -1,0 +1,1 @@
+RULE:dmidecode#/dev#kernel#framebuffer#python#sniffer#pcap.h#
